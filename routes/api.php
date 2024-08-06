@@ -3,16 +3,22 @@
 
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ComplaintController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\CvPhotoController;
+use App\Http\Controllers\Api\EmploymentController;
 use App\Http\Controllers\Api\FilterController;
 use App\Http\Controllers\Api\FooterController;
 use App\Http\Controllers\Api\FormSubmissionController;
+use App\Http\Controllers\Api\JobController;
+use App\Http\Controllers\Api\MusanedController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\PcodeController;
 use App\Http\Controllers\Api\PhotoController;
+use App\Http\Controllers\Api\PolicyController;
 use App\Http\Controllers\Api\RecruitmentContractController;
 use App\Http\Controllers\Api\RecruitmentController;
+use App\Http\Controllers\Api\RecruitmentServiceController;
 use App\Http\Controllers\Api\RequirementController;
 use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\ServiceController;
@@ -69,3 +75,35 @@ Route::post('/offers', [OfferController::class, 'index']);
 Route::get('/contract', [RecruitmentContractController::class, 'index']);
 Route::get('/begin', [RecruitmentContractController::class, 'begin']);
 Route::get('/operations', [RecruitmentContractController::class, 'operation']);
+
+// Employment Section
+Route::get('/arrival', [EmploymentController::class, 'arrival']);
+Route::get('/service', [EmploymentController::class, 'service']);
+
+// Recruitment services section
+Route::get('/recruitmentservice', [RecruitmentServiceController::class, 'index']);
+Route::get('/recruitmentservicecard', [RecruitmentServiceController::class, 'recruitmentservicecard']);
+
+// Policy Section
+Route::get('/policies', [PolicyController::class, 'index']);
+
+// Musaned Section
+Route::get('musaned/about', [MusanedController::class, 'about']);
+
+Route::get('musaned/service', [MusanedController::class, 'service']);
+Route::get('musaned/service/cards', [MusanedController::class, 'serviceCard']);
+
+Route::get('musaned/journey', [MusanedController::class, 'journey']);
+Route::get('musaned/journey/cards', [MusanedController::class, 'journeyCard']);
+
+Route::get('musaned/step', [MusanedController::class, 'step']);
+Route::get('musaned/step/cards', [MusanedController::class, 'stepCard']);
+
+Route::get('musaned/fee', [MusanedController::class, 'fee']);
+Route::get('musaned/app', [MusanedController::class, 'app']);
+
+// Applying for job Section
+Route::post('/job/store', [JobController::class, 'store']);
+
+// Complaints Section
+Route::post('/complaints', [ComplaintController::class, 'index']);
