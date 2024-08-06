@@ -4,8 +4,11 @@
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CountryController;
+use App\Http\Controllers\Api\FooterController;
+use App\Http\Controllers\Api\FormSubmissionController;
 use App\Http\Controllers\Api\PcodeController;
 use App\Http\Controllers\Api\PhotoController;
+use App\Http\Controllers\Api\RequirementController;
 use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\StaticController;
@@ -38,3 +41,11 @@ Route::group([
     Route::get('/sales', [SaleController::class, 'index']);
     Route::get('/country', [CountryController::class, 'index']);
     Route::get('/static', [StaticController::class, 'index']);
+
+  // Requirement Section
+    Route::get('/requirement', [RequirementController::class, 'index']);
+
+  // Form Section
+    Route::post('/submit-form', [FormSubmissionController::class, 'submitForm']);
+
+    Route::get('/settings', [FooterController::class, 'setting']);
