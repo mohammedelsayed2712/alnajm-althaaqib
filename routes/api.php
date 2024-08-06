@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\FormSubmissionController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\PcodeController;
 use App\Http\Controllers\Api\PhotoController;
+use App\Http\Controllers\Api\RecruitmentContractController;
 use App\Http\Controllers\Api\RecruitmentController;
 use App\Http\Controllers\Api\RequirementController;
 use App\Http\Controllers\Api\SaleController;
@@ -63,3 +64,8 @@ Route::get('/recruitment', [RecruitmentController::class, 'index']);
 
 // Offers section
 Route::post('/offers', [OfferController::class, 'index']);
+
+// Recruitment Contract
+Route::get('/contract', [RecruitmentContractController::class, 'index']);
+Route::get('/begin', [RecruitmentContractController::class, 'begin']);
+Route::get('/operations', [RecruitmentContractController::class, 'operation']);
