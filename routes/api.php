@@ -4,10 +4,13 @@
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CountryController;
+use App\Http\Controllers\Api\CvPhotoController;
+use App\Http\Controllers\Api\FilterController;
 use App\Http\Controllers\Api\FooterController;
 use App\Http\Controllers\Api\FormSubmissionController;
 use App\Http\Controllers\Api\PcodeController;
 use App\Http\Controllers\Api\PhotoController;
+use App\Http\Controllers\Api\RecruitmentController;
 use App\Http\Controllers\Api\RequirementController;
 use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\ServiceController;
@@ -32,20 +35,27 @@ Route::group([
     Route::post('password/reset', [AuthController::class, 'resetPassword']);
   });
 
-  // About Section
-    Route::get('/photos', [PhotoController::class, 'index']);
-    Route::get('/about', [AboutController::class, 'index']);
+// About Section
+Route::get('/photos', [PhotoController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index']);
 
-  // Service Section
-    Route::get('/service', [ServiceController::class, 'index']);
-    Route::get('/sales', [SaleController::class, 'index']);
-    Route::get('/country', [CountryController::class, 'index']);
-    Route::get('/static', [StaticController::class, 'index']);
+// Service Section
+Route::get('/service', [ServiceController::class, 'index']);
+Route::get('/sales', [SaleController::class, 'index']);
+Route::get('/country', [CountryController::class, 'index']);
+Route::get('/static', [StaticController::class, 'index']);
 
-  // Requirement Section
-    Route::get('/requirement', [RequirementController::class, 'index']);
+// Requirement Section
+Route::get('/requirement', [RequirementController::class, 'index']);
 
-  // Form Section
-    Route::post('/submit-form', [FormSubmissionController::class, 'submitForm']);
+// Form Section
+Route::post('/submit-form', [FormSubmissionController::class, 'submitForm']);
 
-    Route::get('/settings', [FooterController::class, 'setting']);
+Route::get('/settings', [FooterController::class, 'setting']);
+
+// CV Section
+Route::get('/filters', [FilterController::class, 'getFilters']);
+Route::get('/items/filter', [FilterController::class, 'filterItems']);
+
+Route::get('/cv/photos', [CvPhotoController::class, 'index']);
+Route::get('/recruitment', [RecruitmentController::class, 'index']);
