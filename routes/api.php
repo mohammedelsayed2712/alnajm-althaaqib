@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CvPhotoController;
 use App\Http\Controllers\Api\FilterController;
 use App\Http\Controllers\Api\FooterController;
 use App\Http\Controllers\Api\FormSubmissionController;
+use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\PcodeController;
 use App\Http\Controllers\Api\PhotoController;
 use App\Http\Controllers\Api\RecruitmentController;
@@ -59,3 +60,6 @@ Route::get('/items/filter', [FilterController::class, 'filterItems']);
 
 Route::get('/cv/photos', [CvPhotoController::class, 'index']);
 Route::get('/recruitment', [RecruitmentController::class, 'index']);
+
+// Offers section
+Route::post('/offers', [OfferController::class, 'index']);
