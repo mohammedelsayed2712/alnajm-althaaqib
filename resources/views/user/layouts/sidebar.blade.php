@@ -31,6 +31,13 @@
       </a>
   </li>
 
+  <li class="nav-item">
+      <a class="nav-link" href="{{ route('about_us.index') }}">
+          <span data-feather="file-text" class="align-text-bottom"></span>
+          About Us
+      </a>
+  </li>
+
   {{-- <li class="nav-item">
       <a class="nav-link" href="form-tab.html">
           <span data-feather="file-text" class="align-text-bottom"></span>

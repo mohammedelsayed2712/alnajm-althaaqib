@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,13 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::post('/cvs/{cv}', [CvController::class, 'update'])->name('cvs.update');
     Route::delete('/cvs/{cv}', [CvController::class, 'destroy'])->name('cvs.destroy');
     
-    });
+    Route::get('about_us', [AboutUsController::class, 'index'])->name('about_us.index');
+    Route::get('about_us/create', [AboutUsController::class, 'create'])->name('about_us.create');
+    Route::post('about_us', [AboutUsController::class, 'store'])->name('about_us.store');
+    Route::get('about_us/{aboutUs}/edit', [AboutUsController::class, 'edit'])->name('about_us.edit');
+    Route::put('about_us/{aboutUs}', [AboutUsController::class, 'update'])->name('about_us.update');
+    Route::delete('about_us/{aboutUs}', [AboutUsController::class, 'destroy'])->name('about_us.destroy');
+});
 
 Route::get('/admin/login', [UserController::class, 'login'])->name('admin_login');
 Route::post('/admin/login_submit', [UserController::class, 'login_submit'])->name('admin_login_submit');

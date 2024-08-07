@@ -1,4 +1,3 @@
-
 @extends('user.layouts.master')
 
 @section('main_content')
