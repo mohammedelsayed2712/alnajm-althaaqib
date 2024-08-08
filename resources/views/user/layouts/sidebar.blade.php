@@ -38,6 +38,13 @@
       </a>
   </li>
 
+  <li class="nav-item">
+      <a class="nav-link" href="{{ route('paginates.index') }}">
+          <span data-feather="file-text" class="align-text-bottom"></span>
+          Photos
+      </a>
+  </li>
+
   {{-- <li class="nav-item">
       <a class="nav-link" href="form-tab.html">
           <span data-feather="file-text" class="align-text-bottom"></span>

@@ -27,7 +27,7 @@ class AboutUsController extends Controller
         }
 
         AboutUs::create($data);
-        
+
         return redirect()->route('about_us.index')->with('success', 'About Us section created successfully.');
     }
 

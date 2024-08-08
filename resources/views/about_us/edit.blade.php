@@ -5,7 +5,6 @@
     <h1>Edit About Us Section</h1>
     <form action="{{ route('about_us.update', $aboutUs->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title" value="{{ $aboutUs->title }}" required>
