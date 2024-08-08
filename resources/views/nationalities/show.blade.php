@@ -1,3 +1,4 @@
+
 @extends('user.layouts.master')
 
 @section('main_content')
@@ -8,5 +9,4 @@
     <a href="{{ route('nationalities.index') }}" class="btn btn-primary">Back to Home</a>
 </div>
 @endsection
-
 

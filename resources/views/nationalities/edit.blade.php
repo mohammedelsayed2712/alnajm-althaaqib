@@ -1,9 +1,9 @@
 @extends('user.layouts.master')
 
 @section('main_content')
-    <h1>Edit Countries</h1>
-
-    @if ($errors->any())
+    <div class="container">
+        <h1 >Add New Countries</h1>
+        @if ($errors->any())
         <div>
             <strong>Whoops! Something went wrong!</strong>
             <ul>
@@ -13,31 +13,34 @@
             </ul>
         </div>
     @endif
-
-    <form action="{{ route('nationalities.update', $nationality->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div>
-            <label for="name">Name:</label>
-            <input class="form-control" type="text" name="name" id="name" value="{{ $nationality->name }}">
-        </div>
-            <label for="status">Status:</label>
-            <select  class="form-control" name="status" id="status">
-                <option value="active" {{ $nationality->status == 'active' ? 'selected' : '' }}>Active</option>
-                <option value="inactive" {{ $nationality->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
-            </select>
-                <div class="form-group">
-                    <label for="description">Description : </label>
-                    <textarea class="form-control"  name="description" ></textarea>
-                </div>
-            <div>
-                <label for="name">price :</label>
-                <input class="form-control" type="text" name="text" id="name" value="{{ $nationality->price }}">
+        <form action="{{ route('nationalities.store')}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input class="form-control" type="text" name="name" id="name" value="{{ old('name') }}">
             </div>
 
-        <div>
+            <div>
+                <label for="status">Status:</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                    <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                </select>
+            </div>
             <br>
-            <button type="submit" class="btn btn-success">Update</button>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="name_countries">Name Countries:</label>
+                <input type="text" name="name_countries" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="img">Image:</label>
+                <input type="file" name="img" class="form-control">
+            </div>
+            <br>
+            <div>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+
+        </form>
+    </div>
 @endsection

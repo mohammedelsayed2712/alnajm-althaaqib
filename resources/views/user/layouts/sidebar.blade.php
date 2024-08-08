@@ -35,7 +35,14 @@
         <span data-feather="file-text" class="align-text-bottom"></span>
         Countries
     </a>
-</li>
+   </li>
+   <li class="nav-item">
+    <a class="nav-link" href="{{ route('services.index') }}">
+        <span data-feather="file-text" class="align-text-bottom"></span>
+        Service
+    </a>
+   </li>
+
   <li class="nav-item">
       <a class="nav-link" href="{{ route('about_us.index') }}">
           <span data-feather="file-text" class="align-text-bottom"></span>

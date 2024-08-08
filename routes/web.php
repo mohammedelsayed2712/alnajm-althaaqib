@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\NationalityController;
+use App\Http\Controllers\ServiceMainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::post('/cvs/{cv}', [CvController::class, 'update'])->name('cvs.update');
     Route::delete('/cvs/{cv}', [CvController::class, 'destroy'])->name('cvs.destroy');
     Route::resource('nationalities', NationalityController::class);
+    Route::resource('services', ServiceMainController::class);
 
     Route::get('about_us', [AboutUsController::class, 'index'])->name('about_us.index');
     Route::get('about_us/create', [AboutUsController::class, 'create'])->name('about_us.create');

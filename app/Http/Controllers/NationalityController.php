@@ -47,13 +47,6 @@ class NationalityController extends Controller
         }
          Nationality::create($request->all());
 
-        // Create a new nationality record
-        // Nationality::create([
-        //     'name' => $request->name,
-        //     'status' => $request->status,
-        //     'name_countries' => $request->name_countries,
-        //     'img' => $imageName
-        // ]);
 
         // Redirect to the index page
         return redirect()->route('nationalities.index')->with('success', 'Country added successfully.');
