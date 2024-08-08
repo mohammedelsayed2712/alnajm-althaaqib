@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Paginate extends Model
 {
     use HasFactory;
-
     protected $fillable = ['image_path'];
 }
