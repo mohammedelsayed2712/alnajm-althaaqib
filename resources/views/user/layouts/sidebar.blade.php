@@ -42,6 +42,13 @@
         Service
     </a>
    </li>
+   <li class="nav-item">
+    <a class="nav-link" href="{{ route('communications.index') }}">
+        <span data-feather="file-text" class="align-text-bottom"></span>
+        Communication
+    </a>
+   </li>
+
 
   <li class="nav-item">
       <a class="nav-link" href="{{ route('about_us.index') }}">
