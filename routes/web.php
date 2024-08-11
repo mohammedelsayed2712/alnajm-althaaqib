@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutServiceController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\PaginateController;
@@ -38,6 +39,13 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::get('/about_us/{aboutUs}/edit', [AboutUsController::class, 'edit'])->name('about_us.edit');
     Route::post('/about_us/{aboutUs}', [AboutUsController::class, 'update'])->name('about_us.update');
     Route::delete('/about_us/{aboutUs}', [AboutUsController::class, 'destroy'])->name('about_us.destroy');
+    
+    Route::get('/about_service', [AboutServiceController::class, 'index'])->name('about_service.index');
+    Route::get('/about_service/create', [AboutServiceController::class, 'create'])->name('about_service.create');
+    Route::post('/about_service', [AboutServiceController::class, 'store'])->name('about_service.store');
+    Route::get('/about_service/{about_service}/edit', [AboutServiceController::class, 'edit'])->name('about_service.edit');
+    Route::post('/about_service/{about_service}', [AboutServiceController::class, 'update'])->name('about_service.update');
+    Route::delete('/about_service/{about_service}', [AboutServiceController::class, 'destroy'])->name('about_service.destroy');
 
     Route::get('/paginates', [PaginateController::class, 'index'])->name('paginates.index');
     Route::get('/paginates/create', [PaginateController::class, 'create'])->name('paginates.create');

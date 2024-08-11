@@ -32,18 +32,29 @@
   </li>
 
   <li class="nav-item">
-      <a class="nav-link" href="{{ route('about_us.index') }}">
-          <span data-feather="file-text" class="align-text-bottom"></span>
-          About Us
-      </a>
-  </li>
-
-  <li class="nav-item">
       <a class="nav-link" href="{{ route('paginates.index') }}">
           <span data-feather="file-text" class="align-text-bottom"></span>
           Photos
       </a>
   </li>
+
+  <li class="nav-item dd-item">
+      <a class="nav-link dd-link collapsed" data-bs-toggle="collapse" data-delay="0"
+          href="#collapseSetting" role="button" aria-expanded="false"
+          aria-controls="collapseSetting">
+          <span data-feather="folder" class="align-text-bottom"></span>
+          About
+      </a>
+      <div class="collapse" id="collapseSetting">
+          <a class="nav-link inner-item" href="{{ route('about_us.index') }}">
+              About Us
+          </a>
+          <a class="nav-link inner-item" href="{{ route('about_service.index') }}">
+              About Services
+          </a>
+      </div>
+  </li>
+
 
   {{-- <li class="nav-item">
       <a class="nav-link" href="form-tab.html">
