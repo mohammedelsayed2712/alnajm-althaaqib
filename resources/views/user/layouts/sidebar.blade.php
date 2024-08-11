@@ -54,6 +54,24 @@
           </a>
       </div>
   </li>
+  </li>
+
+  <li class="nav-item dd-item">
+      <a class="nav-link dd-link collapsed" data-bs-toggle="collapse" data-delay="0"
+          href="#collapseSettingService" role="button" aria-expanded="false"
+          aria-controls="collapseSettingService">
+          <span data-feather="folder" class="align-text-bottom"></span>
+          Services
+      </a>
+      <div class="collapse" id="collapseSettingService">
+          <a class="nav-link inner-item" href="{{ route('recruitment.index') }}">
+              Recruitment 
+          </a>
+          {{-- <a class="nav-link inner-item" href="{{ route('about_service.index') }}">
+              About Services
+          </a> --}}
+      </div>
+  </li>
 
 
   {{-- <li class="nav-item">

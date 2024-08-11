@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AboutServiceRequest;
-use App\Models\AboutService;
+use App\Http\Requests\ServiceRecruitmentRequest;
+use App\Models\ServiceRecruitmentCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class AboutServiceController extends Controller
+class ServiceRecruitmentController extends Controller
 {
     public function index() {
-        $services = AboutService::where('is_active', true)->get();
-        // $services = AboutService::get();
-        return view('aboutService.index', compact('services'));
+        $services = ServiceRecruitmentCard::where('is_active', true)->get();
+        // $services = ServiceRecruitmentCard::get();
+        return view('services.Recruitment.index', compact('services'));
     }
 
     public function create() {
-        return view('aboutService.create');
+        return view('services.Recruitment.create');
     }
 
-    public function store(AboutServiceRequest $request) {
+    public function store(ServiceRecruitmentRequest $request) {
         $request->validated();
 
         $imagePath = $request->file('image')->store('uploads/photos', 'public');
 
-        AboutService::create([
-            'icon' => $request->icon,
+        ServiceRecruitmentCard::create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $imagePath,
@@ -35,11 +34,15 @@ class AboutServiceController extends Controller
         return redirect()->route('about_service.index')->with('success', 'Service created successfully');
     }
 
-    public function edit(AboutService $aboutService){
-        return view('aboutService.edit', compact('aboutService'));
+    public function show(ServiceRecruitmentCard $serviceRecruitmentCard){
+        return view('services.Recruitment.show', compact('serviceRecruitmentCard'));
     }
 
-    public function update(AboutServiceRequest $request, AboutService $aboutService){
+    public function edit(ServiceRecruitmentCard $serviceRecruitmentCard){
+        return view('services.Recruitment.edit', compact('serviceRecruitmentCard'));
+    }
+
+    public function update(ServiceRecruitmentRequest $request, ServiceRecruitmentCard $aboutService){
         $data = $request->validated();
         if($request->hasFile('image')) {
             // Remove existing photo
@@ -53,11 +56,11 @@ class AboutServiceController extends Controller
         return redirect()->route('about_service.index')->with('success', 'Service updated successfully');
     }
 
-    public function destroy(AboutService $aboutService){
-        if($aboutService->image){
-            Storage::delete('public/'. $aboutService->image);
+    public function destroy(ServiceRecruitmentCard $serviceRecruitmentCard){
+        if($serviceRecruitmentCard->image){
+            Storage::delete('public/'. $serviceRecruitmentCard->image);
         }
-        $aboutService->delete();
+        $serviceRecruitmentCard->delete();
 
         return redirect()->route('about_service.index')->with('success', 'Service deleted successfully');
     }

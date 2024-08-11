@@ -4,22 +4,13 @@ use App\Http\Controllers\AboutServiceController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\PaginateController;
+use App\Http\Controllers\RecruitmentServiceItemController;
+use App\Http\Controllers\ServiceRecruitmentController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.login');
 });
 
 Route::middleware('auth')->prefix('admin')->group(function() {
@@ -54,6 +45,13 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::get('/paginates/{paginate}/edit', [PaginateController::class, 'edit'])->name('paginates.edit');
     Route::post('/paginates/{paginate}', [PaginateController::class, 'update'])->name('paginates.update');
     Route::delete('/paginates/{paginate}', [PaginateController::class, 'destroy'])->name('paginates.destroy');
+
+    Route::get('/recruitment', [ServiceRecruitmentController::class, 'index'])->name('recruitment.index');
+    Route::get('/recruitment/create', [ServiceRecruitmentController::class, 'create'])->name('recruitment.create');
+    Route::post('/recruitment', [ServiceRecruitmentController::class, 'store'])->name('recruitment.store');
+    Route::get('/recruitment/{recruitment}/edit', [ServiceRecruitmentController::class, 'edit'])->name('recruitment.edit');
+    Route::post('/recruitment/{recruitment}', [ServiceRecruitmentController::class, 'update'])->name('recruitment.update');
+    Route::delete('/recruitment/{recruitment}', [ServiceRecruitmentController::class, 'destroy'])->name('recruitment.destroy');
 });
 
 Route::get('/admin/login', [UserController::class, 'login'])->name('admin_login');
