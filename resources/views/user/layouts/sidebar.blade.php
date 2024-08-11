@@ -65,11 +65,11 @@
       </a>
       <div class="collapse" id="collapseSettingService">
           <a class="nav-link inner-item" href="{{ route('recruitment.index') }}">
-              Recruitment 
+              Recruitment Services
           </a>
-          {{-- <a class="nav-link inner-item" href="{{ route('about_service.index') }}">
-              About Services
-          </a> --}}
+          <a class="nav-link inner-item" href="{{ route('representatives.index') }}">
+             Customer Service Representatives
+          </a>
       </div>
   </li>
 

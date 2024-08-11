@@ -4,8 +4,9 @@ use App\Http\Controllers\AboutServiceController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\PaginateController;
-use App\Http\Controllers\RecruitmentServiceItemController;
+use App\Http\Controllers\RepresentativeController;
 use App\Http\Controllers\ServiceRecruitmentController;
+use App\Http\Controllers\ServiceSaleController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,14 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::get('/recruitment/{recruitment}/edit', [ServiceRecruitmentController::class, 'edit'])->name('recruitment.edit');
     Route::post('/recruitment/{recruitment}', [ServiceRecruitmentController::class, 'update'])->name('recruitment.update');
     Route::delete('/recruitment/{recruitment}', [ServiceRecruitmentController::class, 'destroy'])->name('recruitment.destroy');
+
+    Route::get('/representatives', [RepresentativeController::class, 'index'])->name('representatives.index');
+    Route::get('/representatives/create', [RepresentativeController::class, 'create'])->name('representatives.create');
+    Route::post('/representatives', [RepresentativeController::class, 'store'])->name('representatives.store');
+    Route::get('/representatives/{id}', [RepresentativeController::class, 'show'])->name('representatives.show');
+    Route::get('/representatives/{id}/edit', [RepresentativeController::class, 'edit'])->name('representatives.edit');
+    Route::post('/representatives/{id}', [RepresentativeController::class, 'update'])->name('representatives.update');
+    Route::delete('/representatives/{id}', [RepresentativeController::class, 'destroy'])->name('representatives.destroy');
 });
 
 Route::get('/admin/login', [UserController::class, 'login'])->name('admin_login');
