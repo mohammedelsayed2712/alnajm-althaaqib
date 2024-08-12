@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AboutServiceController;
 use App\Http\Controllers\AboutUsController;
-
+use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\PaginateController;
 use App\Http\Controllers\RecruitmentCountryController;
@@ -78,6 +78,13 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::get('/statistics/{statistic}/edit', [StatisticController::class, 'edit'])->name('statistics.edit');
     Route::post('/statistics/{statistic}', [StatisticController::class, 'update'])->name('statistics.update');
     Route::delete('/statistics/{statistic}', [StatisticController::class, 'destroy'])->name('statistics.destroy');
+    
+    Route::get('/requirements', [RequirementController::class, 'index'])->name('requirements.index');
+    Route::get('/requirements/create', [RequirementController::class, 'create'])->name('requirements.create');
+    Route::post('/requirements', [RequirementController::class, 'store'])->name('requirements.store');
+    Route::get('/requirements/{requirement}/edit', [RequirementController::class, 'edit'])->name('requirements.edit');
+    Route::post('/requirements/{requirement}', [RequirementController::class, 'update'])->name('requirements.update');
+    Route::delete('/requirements/{requirement}', [RequirementController::class, 'destroy'])->name('requirements.destroy');
 });
 
 Route::get('/admin/login', [UserController::class, 'login'])->name('admin_login');
