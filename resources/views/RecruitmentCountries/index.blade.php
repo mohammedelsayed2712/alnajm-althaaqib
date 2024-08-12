@@ -22,9 +22,8 @@
                             <td>{{ $recruitmentCountry->name }}</td>
                             <td><img src="{{ asset('storage/' . $recruitmentCountry->image) }}" width="100"></td>
                             <td>{{ $recruitmentCountry->price }} Riyal</td>
-                            {{-- <td>{{ $recruitmentCountry->phone_number }}</td> --}}
                             <td><a href="tel:{{ $recruitmentCountry->phone_number }}" class="btn btn-danger btn-sm">Call Now</a></td>
-                            <td>{{ $recruitmentCountry->active ? 'Active' : 'Inactive' }}</td>
+                            <td>{{ $recruitmentCountry->is_active ? 'Active' : 'Inactive' }}</td>
                             <td>
                                 <a href="{{ route('recruitmentCountries.show', $recruitmentCountry->id) }}" class="btn btn-warning">Show</a>
                                 <a href="{{ route('recruitmentCountries.edit', $recruitmentCountry->id) }}" class="btn btn-warning">Edit</a>

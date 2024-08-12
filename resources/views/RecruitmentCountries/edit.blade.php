@@ -29,7 +29,7 @@
           <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ $recruitmentCountry->price }}" required>
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <label for="phone_number">Phone Number</label>
           <input type="text" name="phone_number" class="form-control" id="phone_number" value="{{ $recruitmentCountry->phone_number }}">
         </div>

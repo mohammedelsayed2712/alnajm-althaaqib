@@ -80,6 +80,13 @@
     </a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('statistics.index') }}">
+        <span data-feather="file-text" class="align-text-bottom"></span>
+        Statistics
+    </a>
+  </li>
+
 
   {{-- <li class="nav-item">
       <a class="nav-link" href="form-tab.html">

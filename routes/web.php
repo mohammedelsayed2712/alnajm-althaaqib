@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\AboutServiceController;
 use App\Http\Controllers\AboutUsController;
+
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\PaginateController;
 use App\Http\Controllers\RecruitmentCountryController;
 use App\Http\Controllers\RepresentativeController;
 use App\Http\Controllers\ServiceRecruitmentController;
-use App\Http\Controllers\ServiceSaleController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,6 +71,13 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::get('/recruitmentCountries/{recruitmentCountry}/edit', [RecruitmentCountryController::class, 'edit'])->name('recruitmentCountries.edit');
     Route::post('/recruitmentCountries/{recruitmentCountry}', [RecruitmentCountryController::class, 'update'])->name('recruitmentCountries.update');
     Route::delete('/recruitmentCountries/{recruitmentCountry}', [RecruitmentCountryController::class, 'destroy'])->name('recruitmentCountries.destroy');
+
+    Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics.index');
+    Route::get('/statistics/create', [StatisticController::class, 'create'])->name('statistics.create');
+    Route::post('/statistics', [StatisticController::class, 'store'])->name('statistics.store');
+    Route::get('/statistics/{statistic}/edit', [StatisticController::class, 'edit'])->name('statistics.edit');
+    Route::post('/statistics/{statistic}', [StatisticController::class, 'update'])->name('statistics.update');
+    Route::delete('/statistics/{statistic}', [StatisticController::class, 'destroy'])->name('statistics.destroy');
 });
 
 Route::get('/admin/login', [UserController::class, 'login'])->name('admin_login');
