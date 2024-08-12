@@ -73,6 +73,13 @@
       </div>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('recruitmentCountries.index') }}">
+        <span data-feather="file-text" class="align-text-bottom"></span>
+        Recruitment Countries
+    </a>
+  </li>
+
 
   {{-- <li class="nav-item">
       <a class="nav-link" href="form-tab.html">

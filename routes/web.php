@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutServiceController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\PaginateController;
+use App\Http\Controllers\RecruitmentCountryController;
 use App\Http\Controllers\RepresentativeController;
 use App\Http\Controllers\ServiceRecruitmentController;
 use App\Http\Controllers\ServiceSaleController;
@@ -57,10 +58,18 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::get('/representatives', [RepresentativeController::class, 'index'])->name('representatives.index');
     Route::get('/representatives/create', [RepresentativeController::class, 'create'])->name('representatives.create');
     Route::post('/representatives', [RepresentativeController::class, 'store'])->name('representatives.store');
-    Route::get('/representatives/{id}', [RepresentativeController::class, 'show'])->name('representatives.show');
-    Route::get('/representatives/{id}/edit', [RepresentativeController::class, 'edit'])->name('representatives.edit');
-    Route::post('/representatives/{id}', [RepresentativeController::class, 'update'])->name('representatives.update');
-    Route::delete('/representatives/{id}', [RepresentativeController::class, 'destroy'])->name('representatives.destroy');
+    Route::get('/representatives/{representative}', [RepresentativeController::class, 'show'])->name('representatives.show');
+    Route::get('/representatives/{representative}/edit', [RepresentativeController::class, 'edit'])->name('representatives.edit');
+    Route::post('/representatives/{representative}', [RepresentativeController::class, 'update'])->name('representatives.update');
+    Route::delete('/representatives/{representative}', [RepresentativeController::class, 'destroy'])->name('representatives.destroy');
+
+    Route::get('/recruitmentCountries', [RecruitmentCountryController::class, 'index'])->name('recruitmentCountries.index');
+    Route::get('/recruitmentCountries/create', [RecruitmentCountryController::class, 'create'])->name('recruitmentCountries.create');
+    Route::post('/recruitmentCountries', [RecruitmentCountryController::class, 'store'])->name('recruitmentCountries.store');
+    Route::get('/recruitmentCountries/{recruitmentCountry}', [RecruitmentCountryController::class, 'show'])->name('recruitmentCountries.show');
+    Route::get('/recruitmentCountries/{recruitmentCountry}/edit', [RecruitmentCountryController::class, 'edit'])->name('recruitmentCountries.edit');
+    Route::post('/recruitmentCountries/{recruitmentCountry}', [RecruitmentCountryController::class, 'update'])->name('recruitmentCountries.update');
+    Route::delete('/recruitmentCountries/{recruitmentCountry}', [RecruitmentCountryController::class, 'destroy'])->name('recruitmentCountries.destroy');
 });
 
 Route::get('/admin/login', [UserController::class, 'login'])->name('admin_login');

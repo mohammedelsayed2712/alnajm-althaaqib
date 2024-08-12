@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RepresentativeRequest;
 use App\Models\Representative;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RepresentativeController extends Controller
 {
@@ -52,7 +53,11 @@ class RepresentativeController extends Controller
 
     public function destroy(Representative $representative)
     {
+        if($representative->image){
+            Storage::delete('public/'. $representative->image);
+        }
         $representative->delete();
+
         return redirect()->route('representatives.index')->with('success', 'Representative deleted successfully.');
     }
 }
