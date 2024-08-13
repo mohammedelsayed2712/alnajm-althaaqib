@@ -31,7 +31,7 @@
       </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('nationalities.index') }}">
+    <a class="nav-link" href="{{ route('nationality.index') }}">
         <span data-feather="file-text" class="align-text-bottom"></span>
         Countries
     </a>
@@ -48,6 +48,11 @@
         Communication
     </a>
    </li>
+   <a class="nav-link" href="{{ route('call_centers.index') }}">
+    <span data-feather="file-text" class="align-text-bottom"></span>
+    Call Center
+</a>
+</li>
 
 
   <li class="nav-item">

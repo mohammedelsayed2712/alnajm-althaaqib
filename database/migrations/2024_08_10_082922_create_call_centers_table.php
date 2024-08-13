@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nationalities', function (Blueprint $table) {
+        Schema::create('call_centers', function (Blueprint $table) {
             $table->id();
+            $table->string('img');
             $table->string('name');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->string('name_countries')->default('Enter Your country');
-            $table->text('desc')->nullable();
-            $table->string('img')->nullable();
-            $table->decimal('price', 8, 2)->nullable();
+            $table->string('icon1');
+            $table->string('icon2');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nationalities');
+        Schema::dropIfExists('call_centers');
     }
 };

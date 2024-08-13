@@ -6,7 +6,7 @@
         @csrf
         @method('PUT')
         <div class="form-group" >
-            <label for="img">Image</label>
+            <label for="img">Image:</label>
             <input  class="form-control" type="file" name="img" id="img">
             <img src="{{ asset('images/'.$communication->img) }}" width="100" />
         </div>

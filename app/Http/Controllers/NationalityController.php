@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Nationality;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NationalityController extends Controller
 {
@@ -12,8 +13,8 @@ class NationalityController extends Controller
      */
     public function index()
     {
-        $nationalities = Nationality::all();
-        return view('nationalities.index', compact('nationalities'));
+        $nationalities=Nationality::all();
+        return view('nationality.index', compact('nationalities'));
     }
 
     /**
@@ -21,8 +22,7 @@ class NationalityController extends Controller
      */
     public function create()
     {
-        $nationalities = Nationality::all();
-        return view('nationalities.create', compact('nationalities'));
+        return view('nationality.create');
     }
 
     /**
@@ -30,56 +30,49 @@ class NationalityController extends Controller
      */
     public function store(Request $request)
     {
-          // Validate the request
-          $request->validate([
-            'name' => 'required|string|max:255',
-            'status' => 'required|in:active,inactive',
-            'name_countries' => 'nullable|string|max:255',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
+        $request->validate(
+            [
+                'img'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'name'=>'required|string|max:255',
+                'text'=>'required|string|max:255',
+                'price'=>'required|numeric',
+                'icon'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
 
-        // Handle image upload
+        $nationality=new Nationality();
+        // $nationality->img=$request->file('img');
+        $nationality->name=$request->input('name');
+        $nationality->text=$request->input('text');
+        $nationality->price=$request->input('price');
+        $nationality->icon=$request->file('icon');
+
         if ($request->hasFile('img')) {
-            $imageName = time() . '.' . $request->img->extension();
-            $request->img->move(public_path('images'), $imageName);
-        } else {
-            $imageName = null;
+            $nationality->img = $request->file('img')->store('uploads/nationalities', 'public');
         }
-         Nationality::create($request->all());
 
+        if ($request->hasFile('icon')) {
+            $nationality->icon = $request->file('icon')->store('uploads/icons', 'public');
+        }
 
-        // Redirect to the index page
-        return redirect()->route('nationalities.index')->with('success', 'Country added successfully.');
+        $nationality->save();
+
+        return redirect()->route('nationality.index')->with('success','Nationality created successfully');
     }
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'status' => 'required|in:active,inactive',
-            // 'name_countries' => 'required',
-            // 'img'=>'required',
 
-        // ]);
-
-        // Nationality::create($request->all());
-
-        // return redirect()->route('nationalities.index')
-        //                  ->with('success', 'Nationality created successfully.');
-
-
-    public function show(string $id)
+    /**
+     * Display the specified resource.
+     */
+    public function show( Nationality $nationality)
     {
-        $nationality = Nationality::findOrFail($id);
-        return view('nationalities.show', compact('nationality'));
-
+        return view('nationality.show',compact('nationality'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Nationality $nationality)
     {
-        $nationality = Nationality::findOrFail($id);
-        return view('nationalities.edit', compact('nationality'));
-
+        return view('nationality.edit',compact('nationality'));
     }
 
     /**
@@ -87,29 +80,59 @@ class NationalityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'status' => 'required|in:active,inactive'
-        ]);
+        $request->validate(
+            [
+                'img'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'name'=>'required|string|max:255',
+                'text'=>'required|string|max:255',
+                'price'=>'required|numeric',
+                'icon'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
 
+       // $nationality=new Nationality();
         $nationality = Nationality::findOrFail($id);
-        $nationality->update($request->all());
+         $nationality->img=$request->file('img');
+        $nationality->name=$request->input('name');
+        $nationality->text=$request->input('text');
+        $nationality->price=$request->input('price');
+         $nationality->icon=$request->file('icon');
 
-        return redirect()->route('nationalities.index')
-                         ->with('success', 'Nationality updated successfully.');
-
+        if($request->hasFile('img')){
+            if($nationality->img && Storage::exists('public/' . $nationality->img)){
+                Storage::delete('public/'.$nationality->img);
+            }
+        $nationality->img = $request->file('img')->store('uploads/nationalities','public');
     }
+        if ($request->hasFile('icon')){
+            if($nationality->icon&& Storage::exists('public/' . $nationality->icon)){
+                Storage::delete('public/'.$nationality->icon);
+            }
+        $nationality->icon = $request->file('icon')->store('uploads/icons','public');
+}
+        $nationality->save();
+
+        return redirect()->route('nationality.index')->with("success",'Nationality section updated successfully.');
+}
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Nationality $nationality)
     {
-        $nationality = Nationality::findOrFail($id);
+        if ($nationality->img) {
+            Storage::delete('public/' . $nationality->img);
+        }
+
+        if ($nationality->icon) {
+            Storage::delete('public/' . $nationality->icon);
+        }
+
         $nationality->delete();
 
-        return redirect()->route('nationalities.index')
-                         ->with('success', 'Nationality deleted successfully.');
-
+        return redirect()->route('nationality.index')->with('success', 'Nationality deleted successfully.');
     }
 }
