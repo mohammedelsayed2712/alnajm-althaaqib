@@ -18,14 +18,14 @@
             @foreach ($callCenters as $callCenter)
                 <tr>
                     <td>
-                        <img src="{{ asset('images/'.$callCenter->img) }}" width="100" />
+                        <img src="{{ asset('storage/'.$callCenter->img) }}" width="100" />
                     </td>
                     <td>{{ $callCenter->name }}</td>
                     <td>
-                        <img src="{{ asset('icons/' . $callCenter->icon1) }}" alt="Icon 1" width="30">
+                        <img src="{{ asset('storage/' . $callCenter->icon1) }}" alt="Icon 1" width="30">
                     </td>
                     <td>
-                        <img src="{{ asset('icons/' . $callCenter->icon2) }}" alt="Icon 2" width="30">
+                        <img src="{{ asset('storage/' . $callCenter->icon2) }}" alt="Icon 2" width="30">
                     </td>
                     <td>
 

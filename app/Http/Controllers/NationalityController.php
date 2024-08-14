@@ -40,7 +40,7 @@ class NationalityController extends Controller
             ]);
 
         $nationality=new Nationality();
-        // $nationality->img=$request->file('img');
+         $nationality->img=$request->file('img');
         $nationality->name=$request->input('name');
         $nationality->text=$request->input('text');
         $nationality->price=$request->input('price');

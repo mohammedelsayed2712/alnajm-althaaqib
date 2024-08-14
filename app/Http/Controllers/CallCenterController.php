@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\CallCenter;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class CallCenterController extends Controller
@@ -13,7 +13,7 @@ class CallCenterController extends Controller
      */
     public function index()
     {
-        $callCenters= CallCenter::all();
+        $callCenters = CallCenter::all();
         return view('call_centers.index', compact('callCenters'));
     }
 
@@ -36,25 +36,22 @@ class CallCenterController extends Controller
             'icon1' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'icon2' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+        $callCenter = new CallCenter();
+        $callCenter->img = $request->file('img');
+        $callCenter->name = $request->input('name');
+        $callCenter->icon1 = $request->file('icon1');
+        $callCenter->icon2 = $request->file('icon2');
 
-
-        $imageName = time().'_img.'.$request->img->extension();
-        $request->img->move(public_path('images'), $imageName);
-
-
-        $icon1Name = time().'_icon1.'.$request->icon1->extension();
-        $request->icon1->move(public_path('icons'), $icon1Name);
-
-
-        $icon2Name = time().'_icon2.'.$request->icon2->extension();
-        $request->icon2->move(public_path('icons'), $icon2Name);
-
-        CallCenter::create([
-            'img' => $imageName,
-            'name' => $request->name,
-            'icon1' => $icon1Name,
-            'icon2' => $icon2Name,
-        ]);
+        if ($request->hasFile('img')) {
+            $callCenter->img = $request->file('img')->store('uploads/callCenters', 'public');
+        }
+        if ($request->hasFile('icon1')) {
+            $callCenter->icon1 = $request->file('icon1')->store('uploads/callCenter', 'public');
+        }
+        if ($request->hasFile('icon2')) {
+            $callCenter->icon2 = $request->file('icon2')->store('uploads/callCenter', 'public');
+        }
+        $callCenter->save();
 
         return redirect()->route('call_centers.index')->with('success', 'CallCenter created successfully.');
     }
@@ -62,113 +59,79 @@ class CallCenterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(CallCenter $callCenter)
     {
-        $callCenter = CallCenter::findOrFail($id);
         return view('call_centers.show', compact('callCenter'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CallCenter $callCenter)
     {
-        $callCenter = CallCenter::findOrFail($id);
         return view('call_centers.edit', compact('callCenter'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
-        // $request->validate([
-        //     'img' => 'image|mimes:jpeg,png,jpg|max:2048',
-        //     'name' => 'required|string|max:255',
-        //     'icon1' => 'image|mimes:jpeg,png,jpg|max:2048',
-        //     'icon2' => 'image|mimes:jpeg,png,jpg|max:2048',
-        // ]);
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'img' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'name' => 'required|string|max:255',
+            'icon1' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'icon2' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $callCenter = CallCenter::findOrFail($id);
+        $callCenter->img = $request->file('img');
+        $callCenter->name = $request->input('name');
+        $callCenter->icon1 = $request->file('icon1');
+        $callCenter->icon2 = $request->file('icon2');
 
-        // $callCenter = CallCenter::findOrFail($id);
+        if ($request->hasFile('img')) {
+            if ($callCenter->img && Storage::exists('public/' . $callCenter->img)) {
+                Storage::delete('public/' . $callCenter->img);
+            }
+            $callCenter->img = $request->file('img')->store('uploads/callCenters', 'public');
+        }
+        if ($request->hasFile('icon1')) {
+             if($callCenter->icon1 && Storage::exists('public/' . $callCenter->icon1)){
+            Storage::delete('public/' . $callCenter->icon1);
+             }
+             $callCenter->icon1 = $request->file('icon1')->store('uploads/callCenter', 'public');
+        }
 
-        // if (!isset($callCenter)) {
-        //     return redirect()->back()->with('error', 'Call Center not found.');
-        // }
+        if ($request->hasFile('icon2')) {
+             if ($callCenter->icon2 && Storage::exists('public/' . $callCenter->icon2)) {
+                Storage::delete('public/' . $callCenter->icon2);
+            }
+            $callCenter->icon2 = $request->file('icon2')->store('uploads/callCenter', 'public');
+        }
 
-        // if ($request->hasFile('img')) {
-        //     if (file_exists(public_path('images/'.$callCenter->img))) {
-        //         unlink(public_path('images/'.$callCenter->img));
-        //     }
-
-        //     $imageName = time().'_img.'.$request->img->extension();
-        //     $request->img->move(public_path('images'), $imageName);
-        //     $callCenter->img = $imageName;
-        // }
-        // if ($request->hasFile('icon1')) {
-        //     if (file_exists(public_path('icons/'.$callCenter->icon1))) {
-        //         unlink(public_path('icons/'.$callCenter->icon1));
-        //     }
-
-        //     $icon1Name = time().'_icon1.'.$request->icon1->extension();
-        //     $request->icon1->move(public_path('icons'), $icon1Name);
-        //     $callCenter->icon1 = $icon1Name;
-        // }
-
-        // if ($request->hasFile('icon2')) {
-        //     if (file_exists(public_path('icons/'.$callCenter->icon2))) {
-        //         unlink(public_path('icons/'.$callCenter->icon2));
-        //     }
-
-        //     $icon2Name = time().'_icon2.'.$request->icon2->extension();
-        //     $request->icon2->move(public_path('icons'), $icon2Name);
-        //     $callCenter->icon2 = $icon2Name;
-        // }
-        // mohammed elsayed
-        // if($request->hasFile('icon2')){
-        //     Storage::delete('public/'. );
-        // }
-
-        // $callCenter->name = $request->name;
-        // $callCenter->save();
+        $callCenter->save();
 
         return redirect()->route('call_centers.index')->with('success', 'Call Center updated successfully.');
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CallCenter $callCenter)
     {
-   // Retrieve the CallCenter object by its ID
-   $callCenter = CallCenter::find($id);
+        if ($callCenter->img) {
+            Storage::delete('public/' . $callCenter->img);
+        }
 
-   // Check if the CallCenter object exists
-   if (!$callCenter) {
-       return redirect()->route('call_centers.index')->with('error', 'CallCenter not found.');
-   }
+        if ($callCenter->icon1) {
+            Storage::delete('public/' . $callCenter->icon1);
+        }
+        if ($callCenter->icon2) {
+            Storage::delete('public/' . $callCenter->icon2);
+        }
 
-   // Check and delete the image if it exists
-   if (file_exists(public_path('images/'.$callCenter->img))) {
-       unlink(public_path('images/'.$callCenter->img));
-   }
+        $callCenter->delete();
 
-   // Check and delete the first icon if it exists
-   if (file_exists(public_path('icons/'.$callCenter->icon1))) {
-       unlink(public_path('icons/'.$callCenter->icon1));
-   }
-
-   // Check and delete the second icon if it exists
-   if (file_exists(public_path('icons/'.$callCenter->icon2))) {
-       unlink(public_path('icons/'.$callCenter->icon2));
-   }
-
-   // Delete the CallCenter object
-   $callCenter->delete();
-
-   // Redirect with success message
-   return redirect()->route('call_centers.index')->with('success', 'CallCenter deleted successfully.');
-
-
+        return redirect()->route('call_centers.index')->with('success', 'Nationality deleted successfully.');
     }
 }
